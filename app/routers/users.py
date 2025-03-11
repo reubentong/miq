@@ -30,6 +30,7 @@ def create_user(
     logger.info(f"Creating user: {user.first_name}, {user.last_name}")
     return schemas.User.model_validate(crud.create_user(db, user))
 
+
 @router.get("/", response_model=list[schemas.User])
 def get_users(
     skip: int = 0, limit: int = 20, db: Session = Depends(get_db)

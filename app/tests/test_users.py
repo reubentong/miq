@@ -5,6 +5,7 @@ from app.database import Session, engine, Base
 from app.models.users import User
 from datetime import datetime
 
+
 @pytest.fixture(scope="module")
 def db():
     Base.metadata.create_all(bind=engine)
@@ -41,4 +42,7 @@ def test_create_user(client, db):
     assert db_user.first_name == user_data["first_name"]
     assert db_user.last_name == user_data["last_name"]
     assert db_user.age == user_data["age"]
-    assert db_user.date_of_birth == datetime.strptime(user_data["date_of_birth"], '%Y-%m-%d').date()
+    assert (
+        db_user.date_of_birth
+        == datetime.strptime(user_data["date_of_birth"], "%Y-%m-%d").date()
+    )
